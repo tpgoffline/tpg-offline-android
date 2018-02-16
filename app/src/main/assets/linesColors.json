@@ -1,0 +1,447 @@
+[
+    {
+        "background": "5a1e82",
+        "line": "1",
+        "text": "ffffff"
+    },
+    {
+        "background": "cccc33",
+        "line": "2",
+        "text": "000000"
+    },
+    {
+        "background": "CC3399",
+        "line": "3",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "0099FF",
+        "line": "5",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "5+",
+        "text": "ffffff"
+    },
+    {
+        "background": "0099CC",
+        "line": "6",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "009933",
+        "line": "7",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "993333",
+        "line": "8",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "CC0033",
+        "line": "9",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "32781e",
+        "line": "10",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "993399",
+        "line": "11",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "ff9900",
+        "line": "12",
+        "text": "000000"
+    },
+    {
+        "background": "5a1e82",
+        "line": "14",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "993333",
+        "line": "15",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "cc3399",
+        "line": "18",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "ffcc00",
+        "line": "19",
+        "text": "000000"
+    },
+    {
+        "background": "663333",
+        "line": "21",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "5a1e82",
+        "line": "22",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "CC3399",
+        "line": "23",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "993333",
+        "line": "25",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "FFCC00",
+        "line": "28",
+        "text": "000000"
+    },
+    {
+        "background": "009999",
+        "line": "31",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "009999",
+        "line": "33",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "99CCCC",
+        "line": "34",
+        "text": "000000"
+    },
+    {
+        "background": "666666",
+        "line": "35",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "666666",
+        "line": "36",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "009999",
+        "line": "41",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "99CCCC",
+        "line": "42",
+        "text": "000000"
+    },
+    {
+        "background": "99CCCC",
+        "line": "43",
+        "text": "000000"
+    },
+    {
+        "background": "009999",
+        "line": "44",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "99CCCC",
+        "line": "45",
+        "text": "000000"
+    },
+    {
+        "background": "009999",
+        "line": "46",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "009999",
+        "line": "47",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "009999",
+        "line": "51",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "99CCCC",
+        "line": "53",
+        "text": "000000"
+    },
+    {
+        "background": "009999",
+        "line": "54",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "99CCCC",
+        "line": "57",
+        "text": "000000"
+    },
+    {
+        "background": "FF9BAA",
+        "line": "61",
+        "text": "000000"
+    },
+    {
+        "background": "000000",
+        "line": "80",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "81",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "82",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "85",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "87",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "88",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "92",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "93",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "94",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "96",
+        "text": "ffffff"
+    },
+    {
+        "background": "000000",
+        "line": "97",
+        "text": "ffffff"
+    },
+    {
+        "background": "FF6600",
+        "line": "A",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "ff9999",
+        "line": "B",
+        "text": "000000"
+    },
+    {
+        "background": "FF6600",
+        "line": "C",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "000000",
+        "line": "C+",
+        "text": "ffffff"
+    },
+    {
+        "background": "FF9999",
+        "line": "D",
+        "text": "000000"
+    },
+    {
+        "background": "006e3d",
+        "line": "DA",
+        "text": "ffffff"
+    },
+    {
+        "background": "FF6600",
+        "line": "E",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "FF9999",
+        "line": "F",
+        "text": "000000"
+    },
+    {
+        "background": "FF9999",
+        "line": "G",
+        "text": "000000"
+    },
+    {
+        "background": "000000",
+        "line": "G+",
+        "text": "ffffff"
+    },
+    {
+        "background": "ff6600",
+        "line": "J",
+        "text": "ffffff"
+    },
+    {
+        "background": "FF9999",
+        "line": "K",
+        "text": "000000"
+    },
+    {
+        "background": "FF6600",
+        "line": "L",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "FF9BAA",
+        "line": "M",
+        "text": "000000"
+    },
+    {
+        "background": "ff9baa",
+        "line": "N",
+        "text": "000000"
+    },
+    {
+        "background": "5A1E82",
+        "line": "NA",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "663399",
+        "line": "NC",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "993333",
+        "line": "ND",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "cc3399",
+        "line": "NE",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "cccc33",
+        "line": "NJ",
+        "text": "000000"
+    },
+    {
+        "background": "ff9900",
+        "line": "NK",
+        "text": "000000"
+    },
+    {
+        "background": "ff9900",
+        "line": "NM",
+        "text": "000000"
+    },
+    {
+        "background": "B82F89",
+        "line": "NO",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "009999",
+        "line": "NP",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "008CBE",
+        "line": "NS",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "00ACE7",
+        "line": "NT",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "00ade7",
+        "line": "NV",
+        "text": "ffffff"
+    },
+    {
+        "background": "FF9BAA",
+        "line": "O",
+        "text": "000000"
+    },
+    {
+        "background": "003399",
+        "line": "P",
+        "text": "ffffff"
+    },
+    {
+        "background": "e30400",
+        "line": "R",
+        "text": "ffffff"
+    },
+    {
+        "background": "003399",
+        "line": "S",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "FF9BAA",
+        "line": "T",
+        "text": "000000"
+    },
+    {
+        "background": "003399",
+        "line": "U",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "FF6600",
+        "line": "V",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "000000",
+        "line": "V+",
+        "text": "ffffff"
+    },
+    {
+        "background": "003399",
+        "line": "W",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "003399",
+        "line": "X",
+        "text": "FFFFFF"
+    },
+    {
+        "background": "969391",
+        "line": "XA",
+        "text": "ffffff"
+    },
+    {
+        "background": "FF9999",
+        "line": "Y",
+        "text": "000000"
+    },
+    {
+        "background": "FF9999",
+        "line": "Z",
+        "text": "000000"
+    }
+]

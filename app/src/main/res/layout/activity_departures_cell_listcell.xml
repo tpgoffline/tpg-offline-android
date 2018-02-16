@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_vertical"
+        android:minHeight="48dp">
+
+        <TextView
+        android:id="@+id/destinationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/linearLayout"
+            android:layout_toLeftOf="@+id/linearLayout"
+            android:layout_toStartOf="@+id/linearLayout"
+            android:text=";n,"
+            android:textColor="@android:color/black"
+            tools:ignore="RtlHardcoded"
+            android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/chevronIcon"
+        android:layout_toStartOf="@+id/chevronIcon"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/leftTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@id/chevronIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/linearLayout"
+        app:srcCompat="@drawable/ic_chevron_right_black_24dp"
+        android:layout_centerVertical="true" />
+    </RelativeLayout>
