@@ -1,5 +1,6 @@
 package com.dacostafaro.remy.tpgoffline.departures
 
+import android.annotation.SuppressLint
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,11 +11,14 @@ import com.dacostafaro.remy.tpgoffline.App
 import com.dacostafaro.remy.tpgoffline.R
 import com.dacostafaro.remy.tpgoffline.inflate
 import com.dacostafaro.remy.tpgoffline.json.*
+import com.dacostafaro.remy.tpgoffline.sortedWithInt
 import com.github.kittinunf.fuel.Fuel
 import com.squareup.moshi.*
 import kotlinx.android.synthetic.main.activity_departures.*
 import kotlinx.android.synthetic.main.activity_departures_cell.view.*
 import kotlinx.android.synthetic.main.activity_departures_cell_listcell.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -43,7 +47,7 @@ class DeparturesActivity : AppCompatActivity() {
         reload()
     }
 
-    fun reload() {
+    private fun reload() {
         Fuel.get("http://tpgoffline-apns.alwaysdata.net/api/departures/${stop.code}").responseString { _, _, result ->
             result.fold({ responseString ->
                 val moshi = Moshi.Builder()
@@ -70,7 +74,7 @@ class DeparturesActivity : AppCompatActivity() {
 
 class DeparturesRecyclerAdapter(private val departures: ArrayList<Departure>) : RecyclerView.Adapter<DepartureHolder>() {
     override fun onBindViewHolder(holder: DepartureHolder, position: Int) {
-        val line = departures.map { it.line.code }.distinct().sorted()[position]
+        val line = departures.map { it.line.code }.distinct().sortedWithInt()[position]
         val departures = departures.filter { it.line.code == line }
         holder.bindDepartures(line = line, departures = departures)
     }
@@ -99,23 +103,29 @@ class DepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListene
     fun bindDepartures(line: String, departures: List<Departure>) {
         this.departures = departures
         view.lineTextView.text = "Line $line"
+        if (line.take(1).toUpperCase() == "N" && line.length == 2) {
+            view.lineTextView.text = "Line Noctambus ${line.substring(1,2)}"
+        }
         view.lineTextView.setTextColor(App.textForLine(line, "FF"))
         view.lineBackground.setBackgroundColor(App.backgroundForLine(line,"FF"))
         val linearLayoutManager = LinearLayoutManager(view.context)
         view.departuresRecyclerView.layoutManager = linearLayoutManager
-        val adapter = ListCellDeparturesRecyclerAdapter(expanded, java.util.ArrayList(departures))
+        var adapter = ListCellDeparturesRecyclerAdapter(expanded, java.util.ArrayList(departures))
         view.departuresRecyclerView.adapter = adapter
-        view.showMoreButton.setOnClickListener {
-            expanded = !expanded
-            view.showMoreButton.text = if (expanded) {
-                "Show less"
-            } else {
-                "Show more"
+        if (departures.size <= 5) view.showMoreButton.visibility = View.GONE
+        else {
+            view.showMoreButton.visibility = View.VISIBLE
+            view.showMoreButton.setOnClickListener {
+                expanded = !expanded
+                view.showMoreButton.text = if (expanded) {
+                    "Show less"
+                } else {
+                    "Show more"
+                }
+                adapter = ListCellDeparturesRecyclerAdapter(expanded, java.util.ArrayList(departures))
+                view.departuresRecyclerView.adapter = adapter
             }
-            val adapter = ListCellDeparturesRecyclerAdapter(expanded, java.util.ArrayList(departures))
-            view.departuresRecyclerView.adapter = adapter
         }
-        if (departures.size <= 5) (view.showMoreButton.parent as ViewGroup).removeView(view.showMoreButton)
     }
 }
 
@@ -139,6 +149,7 @@ class ListCellDeparturesRecyclerAdapter(private val expanded: Boolean, private v
 class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var departure: Departure? = null
+    private var isClickable = true
 
     init {
         v.setOnClickListener(this)
@@ -148,9 +159,54 @@ class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClic
 
     }
 
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     fun bindDeparture(departure: Departure) {
         this.departure = departure
         view.destinationTextView.text = departure.line.destination
-        view.leftTimeTextView.text = "${departure.leftTime}'"
+
+        when {
+            departure.leftTime == "0" -> {
+                view.leftTimeTextView.text = ""
+                view.leftTimeTextView.visibility = View.GONE
+                view.arrivalIcon.visibility = View.VISIBLE
+                view.noMoreIcon.visibility = View.GONE
+                view.chevronIcon.visibility = View.VISIBLE
+                isClickable = true
+            }
+            departure.leftTime == "&gt;1h" -> {
+                val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZZ").parse(departure.timestamp)
+                view.leftTimeTextView.text = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT).format(date)
+                view.leftTimeTextView.visibility = View.VISIBLE
+                view.noMoreIcon.visibility = View.GONE
+                view.arrivalIcon.visibility = View.GONE
+                view.chevronIcon.visibility = View.VISIBLE
+                isClickable = true
+            }
+            departure.leftTime == "no more" -> {
+                view.noMoreIcon.visibility = View.VISIBLE
+                view.leftTimeTextView.visibility = View.GONE
+                view.arrivalIcon.visibility = View.GONE
+                view.chevronIcon.visibility = View.GONE
+                isClickable = false
+            }
+            else -> {
+                view.leftTimeTextView.visibility = View.VISIBLE
+                view.arrivalIcon.visibility = View.GONE
+                view.noMoreIcon.visibility = View.GONE
+                view.chevronIcon.visibility = View.VISIBLE
+                view.leftTimeTextView.text = "${departure.leftTime}'"
+                isClickable = true
+            }
+        }
+        view.wifiIcon.visibility = if (departure.wifi) {
+             View.VISIBLE
+        } else {
+            View.GONE
+        }
+        view.notPMRIcon.visibility = if (departure.reducedMobilityAccessibility == Departure.ReducedMobilityAccessibility.Inaccessible) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 }

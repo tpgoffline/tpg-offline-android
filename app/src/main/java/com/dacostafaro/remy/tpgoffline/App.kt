@@ -20,7 +20,6 @@ class App {
     companion object {
         var stops: ArrayList<Stop> = ArrayList()
         var linesColors: ArrayList<LineColor> = ArrayList()
-        const val tpgApiKey: String = "d95be980-0830-11e5-a039-0002a5d5c51b"
         fun backgroundForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.background ?: ""))
         fun textForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.text ?: ""))
     }
@@ -31,6 +30,27 @@ val String.escaped
 
 val String.removeAccents
     get() = Normalizer.normalize(this, Normalizer.Form.NFD).replace("[\\p{InCombiningDiacriticalMarks}]", "")
+
+fun Iterable<String>.sortedWithInt(): List<String> {
+    return this.sortedWith(Comparator { lhs, rhs ->
+        try {
+            val i1 = lhs.toInt()
+            val i2 = rhs.toInt()
+            when {
+                i1 < i2 -> -1
+                i1 > i2 -> 1
+                else -> 0
+            }
+        } catch (e: NumberFormatException) {
+            when {
+                lhs < rhs -> -1
+                lhs > rhs -> 1
+                else -> 0
+            }
+        }
+
+    })
+}
 
 class LineColor(
         val line: String,

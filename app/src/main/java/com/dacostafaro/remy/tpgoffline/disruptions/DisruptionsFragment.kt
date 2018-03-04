@@ -20,6 +20,7 @@ import java.util.*
 import android.app.Fragment
 import android.util.Log
 import com.dacostafaro.remy.tpgoffline.inflate
+import com.dacostafaro.remy.tpgoffline.sortedWithInt
 import kotlinx.android.synthetic.main.fragment_disruptions_cell.view.*
 
 class DisruptionsFragment : Fragment() {
