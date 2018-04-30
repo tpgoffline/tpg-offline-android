@@ -1,17 +1,16 @@
 package com.dacostafaro.remy.tpgoffline.departures
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import com.dacostafaro.remy.tpgoffline.App
-import com.dacostafaro.remy.tpgoffline.R
-import com.dacostafaro.remy.tpgoffline.inflate
+import com.dacostafaro.remy.tpgoffline.*
 import com.dacostafaro.remy.tpgoffline.json.*
-import com.dacostafaro.remy.tpgoffline.sortedWithInt
 import com.github.kittinunf.fuel.Fuel
 import com.squareup.moshi.*
 import kotlinx.android.synthetic.main.activity_departures.*
@@ -31,7 +30,7 @@ class DeparturesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_departures)
 
-        val stop = App.stops.firstOrNull { it.appId == intent.getIntExtra("stop", 0) }
+        val stop = App.stops.firstOrNull { it.code == intent.getStringExtra("stop") }
         requireNotNull(stop) { "no stopCode provided in Intent extras" }
         this.stop = stop!!
 
@@ -102,7 +101,7 @@ class DepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListene
 
     fun bindDepartures(line: String, departures: List<Departure>) {
         this.departures = departures
-        view.lineTextView.text = "Line $line"
+        view.lineTextView.text = view.context.getString(R.string.line_title, line)
         if (line.take(1).toUpperCase() == "N" && line.length == 2) {
             view.lineTextView.text = "Line Noctambus ${line.substring(1,2)}"
         }
@@ -156,14 +155,17 @@ class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClic
     }
 
     override fun onClick(v: View) {
-
+        if (departure?.code ?: -1 != -1) {
+            TransitionsObjects.departure = departure
+            val context = view.context
+            val intent = Intent(context, BusRouteActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 
-    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     fun bindDeparture(departure: Departure) {
         this.departure = departure
         view.destinationTextView.text = departure.line.destination
-
         when {
             departure.leftTime == "0" -> {
                 view.leftTimeTextView.text = ""
@@ -194,7 +196,7 @@ class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClic
                 view.arrivalIcon.visibility = View.GONE
                 view.noMoreIcon.visibility = View.GONE
                 view.chevronIcon.visibility = View.VISIBLE
-                view.leftTimeTextView.text = "${departure.leftTime}'"
+                view.leftTimeTextView.text =  view.context.getString(R.string.leftTime, departure.leftTime)
                 isClickable = true
             }
         }

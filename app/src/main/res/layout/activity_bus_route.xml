@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dacostafaro.remy.tpgoffline.departures.DeparturesActivity">
+    tools:context="com.dacostafaro.remy.tpgoffline.departures.BusRouteActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -24,12 +24,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0">
+        android:layout_weight="0.5">
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:context="com.dacostafaro.remy.tpgoffline.departures.MapsActivity" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,7 +46,7 @@
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/departuresRecyclerView"
+                android:id="@+id/busRouteRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.v4.widget.SwipeRefreshLayout>

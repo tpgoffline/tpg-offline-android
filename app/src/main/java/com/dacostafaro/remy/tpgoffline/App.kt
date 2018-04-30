@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dacostafaro.remy.tpgoffline.departures.Stop
+import com.dacostafaro.remy.tpgoffline.json.BusRoute
+import com.dacostafaro.remy.tpgoffline.json.Departure
 import java.util.ArrayList
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.FromJson
@@ -20,8 +22,15 @@ class App {
     companion object {
         var stops: ArrayList<Stop> = ArrayList()
         var linesColors: ArrayList<LineColor> = ArrayList()
+        const val tpgApiKey: String = "d95be980-0830-11e5-a039-0002a5d5c51b"
         fun backgroundForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.background ?: ""))
         fun textForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.text ?: ""))
+    }
+}
+
+class TransitionsObjects {
+    companion object {
+        var departure: Departure? = null
     }
 }
 

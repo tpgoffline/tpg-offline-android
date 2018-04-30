@@ -42,7 +42,7 @@ class StopsFragment : Fragment() {
         this.filterText = filterText
         var stops = App.stops
         if (filterText != "") {
-            stops = ArrayList(stops.filter { it.name.escaped.contains(filterText.escaped) })
+            stops = ArrayList(stops.filter { it.name.escaped.contains(filterText.escaped) || it.code.escaped == filterText.escaped })
         }
         adapter = StopRecyclerAdapter(stops)
 
@@ -101,7 +101,7 @@ class StopHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
     override fun onClick(v: View) {
         val context = view.context
         val intent = Intent(context, DeparturesActivity::class.java)
-        intent.putExtra("stop", stop?.appId)
+        intent.putExtra("stop", stop?.code)
         context.startActivity(intent)
     }
 

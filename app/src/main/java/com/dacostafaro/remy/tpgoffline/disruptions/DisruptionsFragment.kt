@@ -54,7 +54,7 @@ class DisruptionsFragment : Fragment() {
     private fun refresh() {
         Log.d("Disruptions", "Request")
 
-        var url = if (false) {
+        val url = if (false) {
             "https://asmartcode.com/disruptions.json"
         } else {
             "http://prod.ivtr-od.tpg.ch/v1/GetDisruptions.json"
@@ -75,18 +75,11 @@ class DisruptionsFragment : Fragment() {
                 recycler_view.adapter = adapter
 
                 swipeRefreshLayout.isRefreshing = false
+                progressBar.visibility = View.INVISIBLE
             }, {
                 swipeRefreshLayout.isRefreshing = false
+                progressBar.visibility = View.INVISIBLE
             })
-        }
-    }
-
-    companion object {
-        fun newInstance(): DisruptionsFragment {
-            val fragment = DisruptionsFragment()
-            val args = Bundle()
-            fragment.arguments = args
-            return fragment
         }
     }
 }
@@ -119,13 +112,13 @@ class DisruptionHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListen
 
     fun bindDisruption(disruption: Disruption) {
         this.disruption = disruption
-        view.lineTextView.text = "Line ${disruption.line}"
+        view.lineTextView.text = view.context.getString(R.string.line_title, disruption.line)
         var a = disruption.nature
         if (disruption.place != "") {
             a += " - ${disruption.place}"
         }
         view.titleTextView.text = a
-        view.descriptionTextView.text = disruption.consequence
+        view.descriptionTextView.text = disruption.consequence.replace("\n", " ")
 
         view.lineTextView.setTextColor(App.textForLine(disruption.line, "FF"))
         view.titleTextView.setTextColor(App.textForLine(disruption.line, "DE"))

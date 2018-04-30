@@ -121,7 +121,7 @@ data class Departure(
 data class DepartureJson(
         val line: DepartureLine,
         @Json(name = "departureCode") val code: Int = -1,
-        @Json(name = "waitingTime") val leftTime: String = "",
+        val leftTime: String = "",
         val timestamp: String = "",
         val timestampInt: Int = -1,
         val vehiculeNo: Int = -1,
