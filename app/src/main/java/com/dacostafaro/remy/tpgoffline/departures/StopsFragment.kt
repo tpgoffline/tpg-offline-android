@@ -12,6 +12,7 @@ import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.*
 import com.dacostafaro.remy.tpgoffline.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_stops.*
 import kotlinx.android.synthetic.main.fragment_stops_cell.view.*
 import java.util.ArrayList
@@ -36,6 +37,9 @@ class StopsFragment : Fragment() {
         recycler_view.layoutManager = linearLayoutManager
 
         refresh(filterText)
+        if (App.darkMode) {
+            recycler_view.setBackgroundColor(Color.parseColor("#262626"))
+        }
     }
 
     fun refresh(filterText: String) {
@@ -111,12 +115,21 @@ class StopHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
         view.stopSubtitleTextView.text = stop.subTitle
         if (stop.subTitle.isEmpty()) {
             view.stopSubtitleTextView.layoutParams.height = 0
-            view.stopTitleTextView.setTextColor(Color.parseColor("#DE000000"))
+            if (App.darkMode) {
+                view.stopTitleTextView.setTextColor(Color.parseColor("#DEFFFFFF"))
+            } else {
+                view.stopTitleTextView.setTextColor(Color.parseColor("#DE000000"))
+            }
             view.layoutParams.height = dpToPx(view.context,40)
         } else {
             view.stopSubtitleTextView.layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            view.stopSubtitleTextView.setTextColor(Color.parseColor("#DE000000"))
-            view.stopTitleTextView.setTextColor(Color.parseColor("#B3000000"))
+            if (App.darkMode) {
+                view.stopSubtitleTextView.setTextColor(Color.parseColor("#DEFFFFFF"))
+                view.stopTitleTextView.setTextColor(Color.parseColor("#B3FFFFFF"))
+            } else {
+                view.stopSubtitleTextView.setTextColor(Color.parseColor("#DE000000"))
+                view.stopTitleTextView.setTextColor(Color.parseColor("#B3000000"))
+            }
             view.layoutParams.height = dpToPx(view.context, 60)
         }
     }

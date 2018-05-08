@@ -1,5 +1,6 @@
 package com.dacostafaro.remy.tpgoffline
 
+import android.app.AlertDialog
 import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -24,7 +25,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.widget.Toast
 import android.content.ClipData.Item
-
+import android.graphics.drawable.ColorDrawable
+import com.dacostafaro.remy.tpgoffline.maps.MapsListFragment
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -106,6 +108,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val ft = fragmentManager.beginTransaction()
         ft.replace(R.id.frameContainer, fragment, currentFragment)
         ft.commit()
+        supportActionBar?.title = this.baseContext.getString(R.string.departures)
+        if (App.darkMode) {
+            supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.BLACK))
+        }
     }
 
     override fun onBackPressed() {
@@ -123,26 +129,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_departures -> {
                 fragment = StopsFragment()
                 currentFragment = "stops"
+                supportActionBar?.title = this.baseContext.getString(R.string.departures)
             }
             R.id.nav_disruptions -> {
                 fragment = DisruptionsFragment()
                 currentFragment = "disruptions"
+                supportActionBar?.title = this.baseContext.getString(R.string.disruptions)
             }
-            /*R.id.nav_gallery -> {
-
+            R.id.nav_maps -> {
+                fragment = MapsListFragment()
+                currentFragment = "maps"
+                supportActionBar?.title = this.baseContext.getString(R.string.maps)
             }
-            R.id.nav_slideshow -> {
-
+            else -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("WIP")
+                builder.setMessage("Sorry, this part is currently undeveloped.")
+                builder.setPositiveButton("OK") {_, _ ->  }
+                builder.create().show()
             }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }*/
         }
 
         if(null != fragment) {

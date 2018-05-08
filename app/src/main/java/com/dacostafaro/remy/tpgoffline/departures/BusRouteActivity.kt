@@ -2,14 +2,16 @@ package com.dacostafaro.remy.tpgoffline.departures
 
 import android.content.Intent
 import android.graphics.Color
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.dacostafaro.remy.tpgoffline.App
 import com.dacostafaro.remy.tpgoffline.R
+import com.dacostafaro.remy.tpgoffline.R.drawable.map
 import com.dacostafaro.remy.tpgoffline.TransitionsObjects
 import com.dacostafaro.remy.tpgoffline.inflate
 import com.dacostafaro.remy.tpgoffline.json.BusRoute
@@ -30,10 +32,6 @@ import com.squareup.moshi.Rfc3339DateJsonAdapter
 import kotlinx.android.synthetic.main.activity_bus_route.*
 import kotlinx.android.synthetic.main.activity_bus_route_cell.view.*
 import java.util.*
-import com.google.android.gms.maps.model.BitmapDescriptor
-
-
-
 
 class BusRouteActivity : AppCompatActivity() , OnMapReadyCallback {
 
@@ -56,6 +54,7 @@ class BusRouteActivity : AppCompatActivity() , OnMapReadyCallback {
 
         val departure = TransitionsObjects.departure ?: return
         this.departure = departure
+        toolbar.title = this.baseContext.getString(R.string.line_with_destination, departure.line.code, departure.line.destination)
         linearLayoutManager = LinearLayoutManager(this)
         busRouteRecyclerView.layoutManager = linearLayoutManager
 
@@ -77,7 +76,7 @@ class BusRouteActivity : AppCompatActivity() , OnMapReadyCallback {
                 val moshiAdapter = moshi.adapter<BusRouteGroup>(BusRouteGroup::class.java)
 
                 val json = moshiAdapter.fromJson(responseString)!!
-                val steps = java.util.ArrayList(json.steps)
+                val steps = ArrayList(json.steps)
                 passPolyline = PolylineOptions().color(App.backgroundForLine(json.lineCode, "FF"))
 
                 val adapter = BusRouteRecyclerAdapter(steps, line = json.lineCode)
@@ -93,10 +92,7 @@ class BusRouteActivity : AppCompatActivity() , OnMapReadyCallback {
                         step.arrivalTime == "" -> 0.9f
                         else -> 1.0f
                     }
-                    val icon = when {
-                        step.arrivalTime != "" -> BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
-                        else -> BitmapDescriptorFactory.defaultMarker(0.0f)
-                    }
+                    val icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)
                     locations.add(MarkerOptions().position(coordinates).alpha(alpha).icon(icon))
                     when {
                         step.arrivalTime == "" -> disabledPolyline.add(coordinates)

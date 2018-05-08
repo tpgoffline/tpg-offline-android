@@ -21,6 +21,7 @@ import java.text.Normalizer
 class App {
     companion object {
         var stops: ArrayList<Stop> = ArrayList()
+        var darkMode = false
         var linesColors: ArrayList<LineColor> = ArrayList()
         const val tpgApiKey: String = "d95be980-0830-11e5-a039-0002a5d5c51b"
         fun backgroundForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.background ?: ""))

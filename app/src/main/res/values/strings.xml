@@ -23,4 +23,11 @@
     <string name="title_activity_maps">Map</string>
     <string name="leftTime">%s\'</string>
     <string name="line_title">Line %s</string>
+    <string name="line_with_destination">Line %s - %s</string>
+    <string name="search">Search</string>
+    <string name="map">Map</string>
+    <string name="urbain_map">Urbain map</string>
+    <string name="regional_map">Regional map</string>
+    <string name="noctambus_urbain_map">Noctambus urbain map</string>
+    <string name="noctambus_regional_map">Noctambus regional map</string>
 </resources>
