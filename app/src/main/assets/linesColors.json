@@ -1,447 +1,710 @@
 [
     {
-        "background": "5a1e82",
         "line": "1",
+        "hexa": "5a1e82",
+        "background": "5a1e82",
         "text": "ffffff"
     },
     {
-        "background": "cccc33",
+        "line": "1NAV",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "1R",
+        "hexa": "5a1e82",
+        "background": "5a1e82",
+        "text": "ffffff"
+    },
+    {
         "line": "2",
-        "text": "000000"
-    },
-    {
-        "background": "CC3399",
-        "line": "3",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "0099FF",
-        "line": "5",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "5+",
-        "text": "ffffff"
-    },
-    {
-        "background": "0099CC",
-        "line": "6",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "009933",
-        "line": "7",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "993333",
-        "line": "8",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "CC0033",
-        "line": "9",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "32781e",
-        "line": "10",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "993399",
-        "line": "11",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "ff9900",
-        "line": "12",
-        "text": "000000"
-    },
-    {
-        "background": "5a1e82",
-        "line": "14",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "993333",
-        "line": "15",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "cc3399",
-        "line": "18",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "ffcc00",
-        "line": "19",
-        "text": "000000"
-    },
-    {
-        "background": "663333",
-        "line": "21",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "5a1e82",
-        "line": "22",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "CC3399",
-        "line": "23",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "993333",
-        "line": "25",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "FFCC00",
-        "line": "28",
-        "text": "000000"
-    },
-    {
-        "background": "009999",
-        "line": "31",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "009999",
-        "line": "33",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "99CCCC",
-        "line": "34",
-        "text": "000000"
-    },
-    {
-        "background": "666666",
-        "line": "35",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "666666",
-        "line": "36",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "009999",
-        "line": "41",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "99CCCC",
-        "line": "42",
-        "text": "000000"
-    },
-    {
-        "background": "99CCCC",
-        "line": "43",
-        "text": "000000"
-    },
-    {
-        "background": "009999",
-        "line": "44",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "99CCCC",
-        "line": "45",
-        "text": "000000"
-    },
-    {
-        "background": "009999",
-        "line": "46",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "009999",
-        "line": "47",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "009999",
-        "line": "51",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "99CCCC",
-        "line": "53",
-        "text": "000000"
-    },
-    {
-        "background": "009999",
-        "line": "54",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "99CCCC",
-        "line": "57",
-        "text": "000000"
-    },
-    {
-        "background": "FF9BAA",
-        "line": "61",
-        "text": "000000"
-    },
-    {
-        "background": "000000",
-        "line": "80",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "81",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "82",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "85",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "87",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "88",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "92",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "93",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "94",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "96",
-        "text": "ffffff"
-    },
-    {
-        "background": "000000",
-        "line": "97",
-        "text": "ffffff"
-    },
-    {
-        "background": "FF6600",
-        "line": "A",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "ff9999",
-        "line": "B",
-        "text": "000000"
-    },
-    {
-        "background": "FF6600",
-        "line": "C",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "000000",
-        "line": "C+",
-        "text": "ffffff"
-    },
-    {
-        "background": "FF9999",
-        "line": "D",
-        "text": "000000"
-    },
-    {
-        "background": "006e3d",
-        "line": "DA",
-        "text": "ffffff"
-    },
-    {
-        "background": "FF6600",
-        "line": "E",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "FF9999",
-        "line": "F",
-        "text": "000000"
-    },
-    {
-        "background": "FF9999",
-        "line": "G",
-        "text": "000000"
-    },
-    {
-        "background": "000000",
-        "line": "G+",
-        "text": "ffffff"
-    },
-    {
-        "background": "ff6600",
-        "line": "J",
-        "text": "ffffff"
-    },
-    {
-        "background": "FF9999",
-        "line": "K",
-        "text": "000000"
-    },
-    {
-        "background": "FF6600",
-        "line": "L",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "FF9BAA",
-        "line": "M",
-        "text": "000000"
-    },
-    {
-        "background": "ff9baa",
-        "line": "N",
-        "text": "000000"
-    },
-    {
-        "background": "5A1E82",
-        "line": "NA",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "663399",
-        "line": "NC",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "993333",
-        "line": "ND",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "cc3399",
-        "line": "NE",
-        "text": "FFFFFF"
-    },
-    {
+        "hexa": "cccc33",
         "background": "cccc33",
-        "line": "NJ",
         "text": "000000"
     },
     {
-        "background": "ff9900",
-        "line": "NK",
-        "text": "000000"
-    },
-    {
-        "background": "ff9900",
-        "line": "NM",
-        "text": "000000"
-    },
-    {
-        "background": "B82F89",
-        "line": "NO",
+        "line": "3",
+        "hexa": "CC3399",
+        "background": "CC3399",
         "text": "FFFFFF"
     },
     {
-        "background": "009999",
-        "line": "NP",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "008CBE",
-        "line": "NS",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "00ACE7",
-        "line": "NT",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "00ade7",
-        "line": "NV",
-        "text": "ffffff"
-    },
-    {
-        "background": "FF9BAA",
-        "line": "O",
-        "text": "000000"
-    },
-    {
-        "background": "003399",
-        "line": "P",
-        "text": "ffffff"
-    },
-    {
-        "background": "e30400",
-        "line": "R",
-        "text": "ffffff"
-    },
-    {
-        "background": "003399",
-        "line": "S",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "FF9BAA",
-        "line": "T",
-        "text": "000000"
-    },
-    {
-        "background": "003399",
-        "line": "U",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "FF6600",
-        "line": "V",
-        "text": "FFFFFF"
-    },
-    {
+        "line": "4",
+        "hexa": "000000",
         "background": "000000",
-        "line": "V+",
         "text": "ffffff"
     },
     {
-        "background": "003399",
-        "line": "W",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "003399",
-        "line": "X",
-        "text": "FFFFFF"
-    },
-    {
-        "background": "969391",
-        "line": "XA",
+        "line": "5",
+        "hexa": "0099FF",
+        "background": "0099FF",
         "text": "ffffff"
     },
     {
-        "background": "FF9999",
-        "line": "Y",
+        "line": "5+",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "5R",
+        "hexa": "0099ff",
+        "background": "0099ff",
+        "text": "ffffff"
+    },
+    {
+        "line": "6",
+        "hexa": "0099CC",
+        "background": "0099CC",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "7",
+        "hexa": "009933",
+        "background": "009933",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "8",
+        "hexa": "993333",
+        "background": "993333",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "8R",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "9",
+        "hexa": "CC0033",
+        "background": "CC0033",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "10",
+        "hexa": "32781e",
+        "background": "32781e",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "11",
+        "hexa": "993399",
+        "background": "993399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "12",
+        "hexa": "ff9900",
+        "background": "ff9900",
         "text": "000000"
     },
     {
+        "line": "14",
+        "hexa": "5a1e82",
+        "background": "5a1e82",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "15",
+        "hexa": "993333",
+        "background": "993333",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "18",
+        "hexa": "cc3399",
+        "background": "cc3399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "19",
+        "hexa": "ffcc00",
+        "background": "ffcc00",
+        "text": "000000"
+    },
+    {
+        "line": "20",
+        "hexa": "00a827",
+        "background": "00a827",
+        "text": "ffffff"
+    },
+    {
+        "line": "21",
+        "hexa": "78003c",
+        "background": "78003c",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "22",
+        "hexa": "5a1e82",
+        "background": "5a1e82",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "23",
+        "hexa": "CC3399",
+        "background": "CC3399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "25",
+        "hexa": "993333",
+        "background": "993333",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "28",
+        "hexa": "FFCC00",
+        "background": "FFCC00",
+        "text": "000000"
+    },
+    {
+        "line": "31",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "33",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "34",
+        "hexa": "99CCCC",
+        "background": "99CCCC",
+        "text": "000000"
+    },
+    {
+        "line": "34R",
+        "hexa": "99cccc",
+        "background": "99cccc",
+        "text": "000000"
+    },
+    {
+        "line": "35",
+        "hexa": "666666",
+        "background": "666666",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "36",
+        "hexa": "666666",
+        "background": "666666",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "41",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "41R",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "ffffff"
+    },
+    {
+        "line": "42",
+        "hexa": "99CCCC",
+        "background": "99CCCC",
+        "text": "000000"
+    },
+    {
+        "line": "43",
+        "hexa": "99CCCC",
+        "background": "99CCCC",
+        "text": "000000"
+    },
+    {
+        "line": "44",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "45",
+        "hexa": "99CCCC",
+        "background": "99CCCC",
+        "text": "000000"
+    },
+    {
+        "line": "46",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "47",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "51",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "53",
+        "hexa": "99CCCC",
+        "background": "99CCCC",
+        "text": "000000"
+    },
+    {
+        "line": "54",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "56",
+        "hexa": "00b0a4",
+        "background": "00b0a4",
+        "text": "ffffff"
+    },
+    {
+        "line": "57",
+        "hexa": "99CCCC",
+        "background": "99CCCC",
+        "text": "000000"
+    },
+    {
+        "line": "61",
+        "hexa": "FF9BAA",
+        "background": "FF9BAA",
+        "text": "000000"
+    },
+    {
+        "line": "62",
+        "hexa": "ec62a0",
+        "background": "ec62a0",
+        "text": "ffffff"
+    },
+    {
+        "line": "63",
+        "hexa": "ff99aa",
+        "background": "ff99aa",
+        "text": "000000"
+    },
+    {
+        "line": "64",
+        "hexa": "ec62a0",
+        "background": "ec62a0",
+        "text": "ffffff"
+    },
+    {
+        "line": "66",
+        "hexa": "ff9ca9",
+        "background": "ff9ca9",
+        "text": "000000"
+    },
+    {
+        "line": "68",
+        "hexa": "ec62a0",
+        "background": "ec62a0",
+        "text": "ffffff"
+    },
+    {
+        "line": "80",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "81",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "82",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "85",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "86",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "87",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "88",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "92",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "93",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "94",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "96",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "97",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "A",
+        "hexa": "FF6600",
+        "background": "FF6600",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "A1",
+        "hexa": "82419e",
+        "background": "82419e",
+        "text": "ffffff"
+    },
+    {
+        "line": "A2",
+        "hexa": "004385",
+        "background": "004385",
+        "text": "ffffff"
+    },
+    {
+        "line": "A3",
+        "hexa": "00a827",
+        "background": "00a827",
+        "text": "ffffff"
+    },
+    {
+        "line": "A4",
+        "hexa": "008bbe",
+        "background": "008bbe",
+        "text": "ffffff"
+    },
+    {
+        "line": "A5",
+        "hexa": "ec62a0",
+        "background": "ec62a0",
+        "text": "ffffff"
+    },
+    {
+        "line": "A6",
+        "hexa": "e2001e",
+        "background": "e2001e",
+        "text": "ffffff"
+    },
+    {
+        "line": "B",
+        "hexa": "ff9999",
+        "background": "ff9999",
+        "text": "000000"
+    },
+    {
+        "line": "C",
+        "hexa": "FF6600",
+        "background": "FF6600",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "C+",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "CV",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "CVO",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "D",
+        "hexa": "FF9999",
         "background": "FF9999",
+        "text": "000000"
+    },
+    {
+        "line": "E",
+        "hexa": "FF6600",
+        "background": "FF6600",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "F",
+        "hexa": "FF9999",
+        "background": "FF9999",
+        "text": "000000"
+    },
+    {
+        "line": "G",
+        "hexa": "FF9999",
+        "background": "FF9999",
+        "text": "000000"
+    },
+    {
+        "line": "G+",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "J",
+        "hexa": "ff6600",
+        "background": "ff6600",
+        "text": "ffffff"
+    },
+    {
+        "line": "K",
+        "hexa": "FF9999",
+        "background": "FF9999",
+        "text": "000000"
+    },
+    {
+        "line": "L",
+        "hexa": "FF6600",
+        "background": "FF6600",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "M",
+        "hexa": "FF9BAA",
+        "background": "FF9BAA",
+        "text": "000000"
+    },
+    {
+        "line": "N",
+        "hexa": "ec61a0",
+        "background": "ec61a0",
+        "text": "fcfcfc"
+    },
+    {
+        "line": "NA",
+        "hexa": "5A1E82",
+        "background": "5A1E82",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NAV5",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "NC",
+        "hexa": "663399",
+        "background": "663399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "ND",
+        "hexa": "993333",
+        "background": "993333",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NDM",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "NE",
+        "hexa": "cc3399",
+        "background": "cc3399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NJ",
+        "hexa": "cccc33",
+        "background": "cccc33",
+        "text": "000000"
+    },
+    {
+        "line": "NK",
+        "hexa": "ff9900",
+        "background": "ff9900",
+        "text": "000000"
+    },
+    {
+        "line": "NM",
+        "hexa": "ff9900",
+        "background": "ff9900",
+        "text": "000000"
+    },
+    {
+        "line": "NO",
+        "hexa": "B82F89",
+        "background": "B82F89",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NP",
+        "hexa": "009999",
+        "background": "009999",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NS",
+        "hexa": "008CBE",
+        "background": "008CBE",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NT",
+        "hexa": "00ACE7",
+        "background": "00ACE7",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "NV",
+        "hexa": "00ade7",
+        "background": "00ade7",
+        "text": "ffffff"
+    },
+    {
+        "line": "O",
+        "hexa": "FF9BAA",
+        "background": "FF9BAA",
+        "text": "000000"
+    },
+    {
+        "line": "P",
+        "hexa": "003399",
+        "background": "003399",
+        "text": "ffffff"
+    },
+    {
+        "line": "S",
+        "hexa": "003399",
+        "background": "003399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "SE",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "SLN",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "T",
+        "hexa": "FF9BAA",
+        "background": "FF9BAA",
+        "text": "000000"
+    },
+    {
+        "line": "TA",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "TC",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "TS",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "U",
+        "hexa": "003399",
+        "background": "003399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "V",
+        "hexa": "FF6600",
+        "background": "FF6600",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "V+",
+        "hexa": "000000",
+        "background": "000000",
+        "text": "ffffff"
+    },
+    {
+        "line": "W",
+        "hexa": "003399",
+        "background": "003399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "X",
+        "hexa": "003399",
+        "background": "003399",
+        "text": "FFFFFF"
+    },
+    {
+        "line": "XA",
+        "hexa": "969391",
+        "background": "969391",
+        "text": "ffffff"
+    },
+    {
+        "line": "XX",
+        "hexa": "ff0505",
+        "background": "ff0505",
+        "text": "ffffff"
+    },
+    {
+        "line": "Y",
+        "hexa": "FF9999",
+        "background": "FF9999",
+        "text": "000000"
+    },
+    {
         "line": "Z",
+        "hexa": "FF9999",
+        "background": "FF9999",
         "text": "000000"
     }
 ]

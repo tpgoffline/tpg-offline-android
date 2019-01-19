@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_navigation"
+            app:startDestination="@id/home">
+
+    <fragment android:id="@+id/home" android:name="com.dacostafaro.remy.tpgoffline.Home" android:label="@string/tpg_offline"
+              tools:layout="@layout/fragment_home">
+        <action android:id="@+id/action_home_to_stopsFragment" app:destination="@id/stopsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/stopsFragment" android:name="com.dacostafaro.remy.tpgoffline.StopsFragment"
+              android:label="@string/stops" tools:layout="@layout/fragment_stops">
+        <action android:id="@+id/action_stopsFragment_to_departureFragment" app:destination="@id/departureFragment"/>
+    </fragment>
+    <fragment android:id="@+id/departureFragment" android:name="com.dacostafaro.remy.tpgoffline.DepartureFragment"
+              android:label="Departures" tools:layout="@layout/fragment_departure">
+        <argument android:name="stopId" app:argType="string"/>
+        <action android:id="@+id/action_departureFragment_to_bus_route" app:destination="@id/bus_route"/>
+    </fragment>
+    <fragment android:id="@+id/bus_route" android:name="com.dacostafaro.remy.tpgoffline.bus_route"
+              android:label="fragment_bus_route" tools:layout="@layout/fragment_bus_route">
+        <argument android:name="routeId" app:argType="string"/>
+    </fragment>
+</navigation>

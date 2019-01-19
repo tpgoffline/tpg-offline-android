@@ -1,18 +1,17 @@
 package com.dacostafaro.remy.tpgoffline
 
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
-import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dacostafaro.remy.tpgoffline.departures.Stop
-import com.dacostafaro.remy.tpgoffline.json.BusRoute
+import android.view.inputmethod.InputMethodManager
+import androidx.annotation.LayoutRes
 import com.dacostafaro.remy.tpgoffline.json.Departure
-import java.util.ArrayList
-import com.squareup.moshi.JsonDataException
-import com.squareup.moshi.FromJson
-import com.squareup.moshi.ToJson
 import java.text.Normalizer
+import java.util.ArrayList
+import kotlin.Comparator
 
 /**
  * Created by remy on 02/02/2018.
@@ -63,11 +62,17 @@ fun Iterable<String>.sortedWithInt(): List<String> {
 }
 
 class LineColor(
-        val line: String,
-        val text: String,
-        val background: String
+    val line: String,
+    val text: String,
+    val background: String
 )
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+
+fun Activity.dismissKeyboard() {
+    val inputMethodManager = getSystemService( Context.INPUT_METHOD_SERVICE ) as InputMethodManager
+    if( inputMethodManager.isAcceptingText )
+        inputMethodManager.hideSoftInputFromWindow(this.currentFocus.windowToken, /*flags:*/ 0)
 }

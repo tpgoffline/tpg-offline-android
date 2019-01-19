@@ -1,33 +1,11 @@
 <resources>
     <string name="app_name">tpg offline</string>
 
-    <string name="title_activity_main">MainActivity</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
-    <string name="departures">Departures</string>
-    <string name="routes">Routes</string>
-    <string name="disruptions">Disruptions</string>
-    <string name="monitoring">Monitoring</string>
-    <string name="settings">Settings</string>
-    <string name="orientation">Orientation</string>
-    <string name="maps">Maps</string>
-    <string name="lines">Lines</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search_title">Rechercher</string>
-    <string name="search_hint" />
-    <string name="title_activity_maps">Map</string>
+    <string name="stops">Stops</string>
+    <string name="tpg_offline">tpg offline</string>
     <string name="leftTime">%s\'</string>
     <string name="line_title">Line %s</string>
     <string name="line_with_destination">Line %s - %s</string>
-    <string name="search">Search</string>
-    <string name="map">Map</string>
-    <string name="urbain_map">Urbain map</string>
-    <string name="regional_map">Regional map</string>
-    <string name="noctambus_urbain_map">Noctambus urbain map</string>
-    <string name="noctambus_regional_map">Noctambus regional map</string>
 </resources>
