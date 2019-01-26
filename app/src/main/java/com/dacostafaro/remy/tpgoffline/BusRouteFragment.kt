@@ -1,102 +1,127 @@
 package com.dacostafaro.remy.tpgoffline
 
 import android.content.Context
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.dacostafaro.remy.tpgoffline.json.BusRoute
+import com.dacostafaro.remy.tpgoffline.json.BusRouteGroup
+import com.dacostafaro.remy.tpgoffline.json.Departure
+import com.github.kittinunf.fuel.Fuel
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.android.synthetic.main.fragment_bus_route.*
+import kotlinx.android.synthetic.main.fragment_bus_route_cell.view.*
+import java.util.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class BusRouteFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [bus_route.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [bus_route.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
-class bus_route : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var departure: Departure
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_bus_route, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
+    override fun onStart() {
+        super.onStart()
+        val departure = TransitionsObjects.departure ?: return
+        this.departure = departure
+        linearLayoutManager = LinearLayoutManager(this.context)
+        busRouteRecyclerView.layoutManager = linearLayoutManager
+
+        reload()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+    private fun reload() {
+        Fuel.get("https://prod.ivtr-od.tpg.ch/v1/GetThermometerPhysicalStops.json?key=${App.tpgApiKey}&departureCode=${departure.code}").responseString { _, _, result ->
+            result.fold({ responseString ->
+                val moshi = Moshi.Builder()
+                    .add(KotlinJsonAdapterFactory())
+                    .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
+                    .build()
+
+                val moshiAdapter = moshi.adapter<BusRouteGroup>(BusRouteGroup::class.java)
+
+                val json = moshiAdapter.fromJson(responseString)!!
+                val steps = ArrayList(json.steps)
+
+                val adapter = BusRouteRecyclerAdapter(steps, line = json.lineCode)
+
+                busRouteRecyclerView.adapter = adapter
+
+                linearLayoutManager.scrollToPosition(steps.filter { it.arrivalTime == "" }.size)
+            }, {
+            })
         }
     }
+}
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
+class BusRouteRecyclerAdapter(private val steps: ArrayList<BusRoute>, private val line: String) : RecyclerView.Adapter<BusRouteHolder>() {
+    override fun onBindViewHolder(holder: BusRouteHolder, position: Int) {
+        holder.bindStep(step = steps[position], first = position == 0, last = position == steps.size - 1, line = line)
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusRouteHolder {
+        val inflatedView = parent.inflate(R.layout.fragment_bus_route_cell, false)
+        return BusRouteHolder(inflatedView)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment bus_route.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            bus_route().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun getItemCount() = steps.size
+}
+
+class BusRouteHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+    private var view: View = v
+    private var step: BusRoute? = null
+
+    init {
+        v.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View) {
+        val action= BusRouteFragmentDirections.actionBusRouteToDepartureFragment(this.step?.stop?.code ?: "31DC")
+        v.findNavController().navigate(action)
+    }
+
+    fun bindStep(step: BusRoute, first: Boolean, last: Boolean, line: String) {
+        this.step = step
+        view.trackView.isStart = first
+        view.trackView.isEnd = last
+        view.stopTitleTextView.text = step.stop.name
+        when {
+            step.arrivalTime == "" -> {
+                view.arrivalIcon.visibility = View.GONE
+                view.leftTimeTextView.visibility = View.GONE
+                view.trackView.color = Color.GRAY
+                view.stopTitleTextView.setTextColor(Color.GRAY)
             }
+            step.arrivalTime?.toInt() ?: -1 == 0 -> {
+                view.arrivalIcon.visibility = View.VISIBLE
+                view.leftTimeTextView.visibility = View.GONE
+                view.trackView.color = App.backgroundForLine(line = line, alpha = "FF")
+                view.stopTitleTextView.setTextColor(App.backgroundForLine(line = line, alpha = "FF"))
+            }
+            else -> {
+                val leftTimeString = view.context.getString(R.string.leftTime, step.arrivalTime)
+                view.leftTimeTextView.text = leftTimeString
+                view.arrivalIcon.visibility = View.GONE
+                view.leftTimeTextView.visibility = View.VISIBLE
+                view.trackView.color = App.backgroundForLine(line = line, alpha = "FF")
+                view.stopTitleTextView.setTextColor(App.backgroundForLine(line = line, alpha = "FF"))
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dacostafaro.remy.tpgoffline.json.Departure
@@ -116,7 +117,7 @@ class DepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListene
         v.setOnClickListener(this)
     }
 
-    override fun onClick(v: View) {
+    override fun onClick(v: View?) {
 
     }
 
@@ -178,9 +179,8 @@ class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClic
     override fun onClick(v: View) {
         if (departure?.code ?: -1 != -1) {
             TransitionsObjects.departure = departure
-            val context = view.context
-            //val intent = Intent(context, BusRouteActivity::class.java)
-            //context.startActivity(intent)
+            val action = DepartureFragmentDirections.actionDepartureFragmentToBusRoute()
+            v.findNavController().navigate(action)
         }
     }
 

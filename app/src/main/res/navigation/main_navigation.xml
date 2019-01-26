@@ -17,8 +17,8 @@
         <argument android:name="stopId" app:argType="string"/>
         <action android:id="@+id/action_departureFragment_to_bus_route" app:destination="@id/bus_route"/>
     </fragment>
-    <fragment android:id="@+id/bus_route" android:name="com.dacostafaro.remy.tpgoffline.bus_route"
-              android:label="fragment_bus_route" tools:layout="@layout/fragment_bus_route">
-        <argument android:name="routeId" app:argType="string"/>
+    <fragment android:id="@+id/bus_route" android:name="com.dacostafaro.remy.tpgoffline.BusRouteFragment"
+              android:label="Bus Route" tools:layout="@layout/fragment_bus_route">
+        <action android:id="@+id/action_bus_route_to_departureFragment" app:destination="@id/departureFragment"/>
     </fragment>
 </navigation>
