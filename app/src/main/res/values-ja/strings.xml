@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">オフラインのtpg</string>
+    <string name="leftTime">%s</string>
+    <string name="line_title">経路%s</string>
+    <string name="tpg_offline">tpg offline</string>
+    <string name="stops">バス停</string>
+    <string name="line_with_destination">経路%s（%sまで）</string>
+    <string name="are_you_going_somewhere">どこか行きますか？</string>
+</resources>

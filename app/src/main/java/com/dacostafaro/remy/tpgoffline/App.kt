@@ -76,3 +76,12 @@ fun Activity.dismissKeyboard() {
     if( inputMethodManager.isAcceptingText )
         inputMethodManager.hideSoftInputFromWindow(this.currentFocus.windowToken, /*flags:*/ 0)
 }
+
+data class Stop(
+    val name: String,
+    val title: String,
+    val subTitle: String,
+    val appId: Int,
+    var code: String,
+    val latitude: Double,
+    val longitude: Double)

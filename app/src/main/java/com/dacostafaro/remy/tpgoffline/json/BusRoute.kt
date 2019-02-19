@@ -14,7 +14,7 @@ data class BusRouteGroup(
 
 data class BusRoute(
     val stop: Stop,
-    val physicalStop: PhysicalStop,
+    val physicalStop: PhysicalStop?,
     val timestamp: String,
     val arrivalTime: String? = "",
     //var first: Boolean,

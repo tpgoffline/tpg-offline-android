@@ -11,9 +11,8 @@
             android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            mapbox:mapbox_cameraTargetLat="40.73581"
-            mapbox:mapbox_cameraTargetLng="-73.99155"
-            mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v11"
+            mapbox:mapbox_cameraTargetLat="46.2043907"
+            mapbox:mapbox_cameraTargetLng="6.1431577"
             mapbox:mapbox_cameraZoom="11" >
     </com.mapbox.mapboxsdk.maps.MapView>
     <fragment

@@ -16,6 +16,7 @@ import com.dacostafaro.remy.tpgoffline.json.BusRoute
 import com.dacostafaro.remy.tpgoffline.json.BusRouteGroup
 import com.dacostafaro.remy.tpgoffline.json.Departure
 import com.github.kittinunf.fuel.Fuel
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -64,6 +65,18 @@ class BusRouteFragment : Fragment() {
                 busRouteRecyclerView.adapter = adapter
 
                 linearLayoutManager.scrollToPosition(steps.filter { it.arrivalTime == "" }.size)
+
+                (activity as MainActivity).drawLineOnMap(steps.map { step -> Marker(LatLng((step.physicalStop?.coordinates?.latitude ?:  App.stops.first { it.code == step.stop.code }.latitude), step.physicalStop?.coordinates?.longitude ?:  App.stops.first { it.code == step.stop.code }.longitude), step.stop.name, when {
+                    step.arrivalTime == "" -> {
+                        false
+                    }
+                    step.arrivalTime?.toInt() ?: -1 == 0 -> {
+                        true
+                    }
+                    else -> {
+                        false
+                    }
+                })}, json.lineCode)
             }, {
             })
         }

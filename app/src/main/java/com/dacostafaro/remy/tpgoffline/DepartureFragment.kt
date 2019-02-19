@@ -1,5 +1,7 @@
 package com.dacostafaro.remy.tpgoffline
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -52,11 +54,40 @@ class DepartureFragment : Fragment() {
         linearLayoutManager = LinearLayoutManager(this.context)
         departuresRecyclerView.layoutManager = linearLayoutManager
 
+        reload()
+
+
+
+        if ((activity as MainActivity).favoritesStops.contains(stop.appId))
+            favoriteButton.setImageResource(R.drawable.ic_star_black_24dp)
+        else
+            favoriteButton.setImageResource(R.drawable.ic_star_border_black_24dp)
+
+        favoriteButton.setOnClickListener {
+            if ((activity as MainActivity).favoritesStops.contains(stop.appId)) {
+                val favoritesStops = (activity as MainActivity).favoritesStops
+                favoritesStops.remove(stop.appId)
+                val sharedPref = this.activity?.getSharedPreferences(getString(R.string.shared_preferences), Context.MODE_PRIVATE) ?: return@setOnClickListener
+                with(sharedPref.edit()) {
+                    putString(getString(R.string.key_favorite), favoritesStops.joinToString(","))
+                    apply()
+                }
+                favoriteButton.setImageResource(R.drawable.ic_star_border_black_24dp)
+            } else {
+                val favoritesStops = (activity as MainActivity).favoritesStops
+                favoritesStops.add(stop.appId)
+                val sharedPref = this.activity?.getSharedPreferences(getString(R.string.shared_preferences), Context.MODE_PRIVATE) ?: return@setOnClickListener
+                with(sharedPref.edit()) {
+                    putString(getString(R.string.key_favorite), favoritesStops.joinToString(","))
+                    apply()
+                }
+                favoriteButton.setImageResource(R.drawable.ic_star_black_24dp)
+            }
+        }
+
         //swipeRefreshLayout.setOnRefreshListener {
         //    reload()
         //}
-
-        reload()
     }
 
     fun reload() {
@@ -150,14 +181,14 @@ class DepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListene
     }
 }
 
-class ListCellDeparturesRecyclerAdapter(private val expanded: Boolean, private val departures: ArrayList<Departure>) : RecyclerView.Adapter<LictCellDepartureHolder>() {
-    override fun onBindViewHolder(holder: LictCellDepartureHolder, position: Int) {
+class ListCellDeparturesRecyclerAdapter(private val expanded: Boolean, private val departures: ArrayList<Departure>) : RecyclerView.Adapter<ListCellDepartureHolder>() {
+    override fun onBindViewHolder(holder: ListCellDepartureHolder, position: Int) {
         holder.bindDeparture(departures[position])
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LictCellDepartureHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListCellDepartureHolder {
         val inflatedView = parent.inflate(R.layout.fragment_departure_cell_listcell, false)
-        return LictCellDepartureHolder(inflatedView)
+        return ListCellDepartureHolder(inflatedView)
     }
 
     override fun getItemCount() = if (!expanded && departures.size > 5) {
@@ -167,7 +198,7 @@ class ListCellDeparturesRecyclerAdapter(private val expanded: Boolean, private v
     }
 }
 
-class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
+class ListCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var departure: Departure? = null
     private var isClickable = true
@@ -184,6 +215,7 @@ class LictCellDepartureHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClic
         }
     }
 
+    @SuppressLint("SimpleDateFormat") // Linter should'nt give a warning, since the pattern is not designed for the user, but for the API.
     fun bindDeparture(departure: Departure) {
         this.departure = departure
         view.destinationTextView.text = departure.line.destination

@@ -1,11 +1,11 @@
-<resources>
-    <string name="app_name">tpg offline</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" tools:override="true">tpg offline</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="stops">Stops</string>
     <string name="tpg_offline">tpg offline</string>
     <string name="leftTime">%s\'</string>
     <string name="line_title">Line %s</string>
     <string name="line_with_destination">Line %s - %s</string>
+    <string name="are_you_going_somewhere">Are you going somewhere?</string>
+    <string name="going_somewhere">Are you going somewhere ?</string>
 </resources>

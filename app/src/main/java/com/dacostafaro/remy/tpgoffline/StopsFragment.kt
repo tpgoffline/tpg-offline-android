@@ -152,10 +152,3 @@ fun dpToPx(context: Context, dp: Int): Int {
     val density = context.resources.displayMetrics.density
     return Math.round(dp.toFloat() * density)
 }
-
-data class Stop(
-    val name: String,
-    val title: String,
-    val subTitle: String,
-    val appId: Int,
-    var code: String)

@@ -1,0 +1,4 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="shared_preferences" translatable="false">com.dacostafaro.remy.tpgoffline.preferences</string>
+    <string name="key_favorite" translatable="false">com.dacostafaro.remy.tpgoffline.preferences</string>
+</resources>

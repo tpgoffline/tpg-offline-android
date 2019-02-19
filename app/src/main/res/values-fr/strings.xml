@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tpg offline</string>
+    <string name="are_you_going_somewhere">Vous allez quelque part ?</string>
+    <string name="leftTime">%s\'</string>
+    <string name="line_title">Ligne %s</string>
+    <string name="line_with_destination">Ligne %s - %s</string>
+    <string name="stops">Arrêts</string>
+    <string name="tpg_offline">tpg offline</string>
+</resources>

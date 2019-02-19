@@ -4,9 +4,10 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_navigation"
             app:startDestination="@id/home">
 
-    <fragment android:id="@+id/home" android:name="com.dacostafaro.remy.tpgoffline.Home" android:label="@string/tpg_offline"
+    <fragment android:id="@+id/home" android:name="com.dacostafaro.remy.tpgoffline.HomeFragment" android:label="@string/tpg_offline"
               tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_home_to_stopsFragment" app:destination="@id/stopsFragment"/>
+        <action android:id="@+id/action_home_to_departureFragment" app:destination="@id/departureFragment"/>
     </fragment>
     <fragment android:id="@+id/stopsFragment" android:name="com.dacostafaro.remy.tpgoffline.StopsFragment"
               android:label="@string/stops" tools:layout="@layout/fragment_stops">
