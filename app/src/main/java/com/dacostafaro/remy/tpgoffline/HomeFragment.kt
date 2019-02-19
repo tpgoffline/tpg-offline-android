@@ -49,7 +49,11 @@ class HomeFragment : Fragment() {
 
         linearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = linearLayoutManager
-        val adapter = HomeRecyclerAdapter(activity!!)
+        (activity as MainActivity).executeOnLocationChange = {
+            val adapter = HomeRecyclerAdapter(activity!!, (activity as MainActivity).nearestStops(1))
+            recyclerView.adapter = adapter
+        }
+        val adapter = HomeRecyclerAdapter(activity!!, (activity as MainActivity).nearestStops(1))
         recyclerView.adapter = adapter
     }
 
@@ -67,12 +71,13 @@ enum class HomeCardType {
     LOCATION, FAVORITE, DISRUPTIONS, LINES
 }
 
-class HomeRecyclerAdapter(val activity: FragmentActivity, val nearestStops: List<Stop> = listOf()) : RecyclerView.Adapter<HomeCardHolder>() {
+class HomeRecyclerAdapter(val activity: FragmentActivity, val nearestStops: List<Stop>) : RecyclerView.Adapter<HomeCardHolder>() {
     override fun onBindViewHolder(holder: HomeCardHolder, position: Int) {
         var max = 0
         max += nearestStops.count()
         if (position < max) {
-            // TODO: Show all nearest stops
+            holder.bindStop(nearestStops[position].appId)
+            return
         }
         max += (activity as MainActivity).favoritesStops.count()
         if (position < max) {
@@ -86,7 +91,7 @@ class HomeRecyclerAdapter(val activity: FragmentActivity, val nearestStops: List
         return HomeCardHolder(inflatedView)
     }
 
-    override fun getItemCount() = (activity as MainActivity).favoritesStops.count()
+    override fun getItemCount() = nearestStops.count() + (activity as MainActivity).favoritesStops.count()
 }
 
 class HomeCardHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener {
