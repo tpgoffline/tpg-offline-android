@@ -25,6 +25,24 @@ class App {
         const val tpgApiKey: String = "d95be980-0830-11e5-a039-0002a5d5c51b"
         fun backgroundForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.background ?: ""))
         fun textForLine(line: String, alpha: String): Int = Color.parseColor("#" + alpha + (linesColors.firstOrNull { it.line == line }?.text ?: ""))
+        fun dayStringToId(day: String): Int {
+            return when (day) {
+                "Monday" -> 0
+                "Friday" -> 1
+                "Saturday" -> 2
+                "Sunday" -> 3
+                else -> -1
+            }
+        }
+
+        fun dayNumberToId(day: Int): Int {
+            return when (day) {
+                6 -> 1
+                7 -> 2
+                1 -> 3
+                else -> 0
+            }
+        }
     }
 }
 

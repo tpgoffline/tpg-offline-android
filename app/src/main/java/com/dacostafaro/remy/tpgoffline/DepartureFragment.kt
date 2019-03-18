@@ -2,6 +2,7 @@ package com.dacostafaro.remy.tpgoffline
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_departure_cell.view.*
 import kotlinx.android.synthetic.main.fragment_departure_cell_listcell.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.fixedRateTimer
 
 class DepartureFragment : Fragment() {
 
@@ -40,13 +42,11 @@ class DepartureFragment : Fragment() {
 
         activity!!.dismissKeyboard()
 
-        val stop = App.stops.firstOrNull { it.code == DepartureFragmentArgs.fromBundle(this.arguments!!).stopId }
-        requireNotNull(stop) { "no stopCode provided in Intent extras" }
+        val stop = App.stops.first { it.code == DepartureFragmentArgs.fromBundle(this.arguments!!).stopId }
         this.stop = stop
 
         stop_title.text = stop.title
         stop_subtitle.text = stop.subTitle
-
         if (stop.subTitle.isEmpty()) {
             stop_subtitle.visibility = View.GONE
         }
@@ -55,8 +55,6 @@ class DepartureFragment : Fragment() {
         departuresRecyclerView.layoutManager = linearLayoutManager
 
         reload()
-
-
 
         if ((activity as MainActivity).favoritesStops.contains(stop.appId))
             favoriteButton.setImageResource(R.drawable.ic_star_black_24dp)
@@ -84,13 +82,13 @@ class DepartureFragment : Fragment() {
                 favoriteButton.setImageResource(R.drawable.ic_star_black_24dp)
             }
         }
-
-        //swipeRefreshLayout.setOnRefreshListener {
-        //    reload()
-        //}
     }
 
     fun reload() {
+        if (departuresRecyclerView == null) {
+            return
+        }
+        loadingProgressView.visibility = View.VISIBLE
         Fuel.get("https://api.tpgoffline.com/departures/${stop.code}?key=d95be980-0830-11e5-a039-0002a5d5c51b").responseString { _, _, result ->
             result.fold({ responseString ->
                 val moshi = Moshi.Builder()
@@ -106,9 +104,10 @@ class DepartureFragment : Fragment() {
                 val adapter = DeparturesRecyclerAdapter(departures)
 
                 departuresRecyclerView.adapter = adapter
-
+                loadingProgressView.visibility = View.GONE
                 //swipeRefreshLayout.isRefreshing = false
             }, {
+                loadingProgressView.visibility = View.GONE
                 //swipeRefreshLayout.isRefreshing = false
             })
         }

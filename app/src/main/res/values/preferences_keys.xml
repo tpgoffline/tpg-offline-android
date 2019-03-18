@@ -1,4 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="shared_preferences" translatable="false">com.dacostafaro.remy.tpgoffline.preferences</string>
-    <string name="key_favorite" translatable="false">com.dacostafaro.remy.tpgoffline.preferences</string>
+    <string name="key_favorite" translatable="false">com.dacostafaro.remy.tpgoffline.preferences.key_favorite</string>
+    <string name="offline_departures_md5" translatable="false">com.dacostafaro.remy.tpgoffline.preferences.offline_departures_md5</string>
+    <string name="mapbox_light_theme" translatable="false">mapbox://styles/remydcf/cjsg6h2z910i71gp01zzskedt</string>
+    <string name="mapbox_dark_theme" translatable="false">mapbox://styles/remydcf/cjkl5f9tm0yyi2smonz4fr2go</string>
 </resources>

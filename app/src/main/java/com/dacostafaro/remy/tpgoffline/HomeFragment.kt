@@ -28,9 +28,11 @@ import java.util.*
 import kotlin.concurrent.fixedRateTimer
 import android.graphics.drawable.GradientDrawable
 
-
-
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), LocalisationManagerInterface {
+    override fun didNearestStopChanged() {
+        val adapter = HomeRecyclerAdapter(activity!!, AppLocalisationManager.shared.nearestStops(1))
+        recyclerView.adapter = adapter
+    }
 
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -44,16 +46,14 @@ class HomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        AppLocalisationManager.shared.add(this)
+
         search_stops_button.text = getString(R.string.going_somewhere)
         search_stops_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_home_to_stopsFragment, null))
 
         linearLayoutManager = LinearLayoutManager(this.context)
         recyclerView.layoutManager = linearLayoutManager
-        (activity as MainActivity).executeOnLocationChange = {
-            val adapter = HomeRecyclerAdapter(activity!!, (activity as MainActivity).nearestStops(1))
-            recyclerView.adapter = adapter
-        }
-        val adapter = HomeRecyclerAdapter(activity!!, (activity as MainActivity).nearestStops(1))
+        val adapter = HomeRecyclerAdapter(activity!!, AppLocalisationManager.shared.nearestStops(1))
         recyclerView.adapter = adapter
     }
 
@@ -76,13 +76,13 @@ class HomeRecyclerAdapter(val activity: FragmentActivity, val nearestStops: List
         var max = 0
         max += nearestStops.count()
         if (position < max) {
-            holder.bindStop(nearestStops[position].appId)
+            holder.bindStop(nearestStops[position].appId, HomeCardType.LOCATION)
             return
         }
         max += (activity as MainActivity).favoritesStops.count()
         if (position < max) {
             val index = position - (nearestStops.count())
-            holder.bindStop((activity as MainActivity).favoritesStops[index])
+            holder.bindStop((activity as MainActivity).favoritesStops[index], HomeCardType.FAVORITE)
         }
     }
 
@@ -113,6 +113,7 @@ class HomeCardHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener
     }
 
     fun reload() {
+        view.loadingProgressView.visibility = View.VISIBLE
         Fuel.get("https://api.tpgoffline.com/departures/${this.stopCode}?key=d95be980-0830-11e5-a039-0002a5d5c51b").responseString { _, _, result ->
             result.fold({ responseString ->
                 val moshi = Moshi.Builder()
@@ -128,15 +129,21 @@ class HomeCardHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener
                 val adapter = StopListCellHomeRecyclerAdapter(departures, stopCode)
 
                 view.departuresRecyclerView.adapter = adapter
+                view.loadingProgressView.visibility = View.GONE
             }, {
+                view.loadingProgressView.visibility = View.GONE
             })
         }
     }
 
-    fun bindStop(appId: Int) {
+    fun bindStop(appId: Int, cardType: HomeCardType) {
         val stop = App.stops.firstOrNull { it.appId == appId }
         requireNotNull(stop) { "appId is invalid: ${appId}" }
         view.cardTitleView.text = stop.name
+        view.imageView.setImageResource(when (cardType) {
+            HomeCardType.LOCATION -> R.drawable.ic_near_me_black_24dp
+            else -> R.drawable.ic_star_black_24dp
+        })
         linearLayoutManager = object:LinearLayoutManager(view.context) {
             override fun canScrollVertically(): Boolean {
                 return false
@@ -144,7 +151,7 @@ class HomeCardHolder(v: View) : RecyclerView.ViewHolder(v), View.OnClickListener
         }
         view.departuresRecyclerView.layoutManager = linearLayoutManager
         this.stopCode = stop.code
-        timer = fixedRateTimer(name = "hello-timer", initialDelay = 0, period = 30000) {
+        timer = fixedRateTimer(name = "reload-timer", initialDelay = 0, period = 30000) {
             reload()
         }
     }

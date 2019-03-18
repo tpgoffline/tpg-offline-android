@@ -13,7 +13,9 @@
             android:layout_height="match_parent"
             mapbox:mapbox_cameraTargetLat="46.2043907"
             mapbox:mapbox_cameraTargetLng="6.1431577"
-            mapbox:mapbox_cameraZoom="11" >
+            mapbox:mapbox_cameraZoom="11"
+            mapbox:mapbox_styleUrl="@string/mapbox_light_theme"
+    >
     </com.mapbox.mapboxsdk.maps.MapView>
     <fragment
             android:name="androidx.navigation.fragment.NavHostFragment"

@@ -1,65 +1,27 @@
 package com.dacostafaro.remy.tpgoffline
 
 import android.content.Context
-import android.location.Location
-import android.location.LocationListener
+import android.graphics.Color
 import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.dacostafaro.remy.tpgoffline.db.database
+import com.github.kittinunf.fuel.Fuel
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.annotations.MarkerOptions
+import com.mapbox.mapboxsdk.annotations.PolylineOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
-import com.mapbox.mapboxsdk.maps.Style
-import com.mapbox.mapboxsdk.plugins.annotation.LineManager
-import com.mapbox.mapboxsdk.plugins.annotation.LineOptions
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolManager
-import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.db.insert
+import org.jetbrains.anko.doAsync
 import timber.log.Timber
-import kotlin.math.pow
-import kotlin.math.sqrt
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-    var symbolManager: SymbolManager? = null
-    var lineManager: LineManager? = null
-    private var locationMananger: LocationManager? = null
-    var currentLocation: Location? = null
-    public var executeOnLocationChange: (() -> Unit)? = null
-
-    val locationListener: LocationListener = object : LocationListener {
-        override fun onLocationChanged(location: Location) {
-            currentLocation = location
-            executeOnLocationChange?.invoke()
-        }
-
-        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
-        override fun onProviderEnabled(provider: String) {}
-        override fun onProviderDisabled(provider: String) {}
-    }
-
-    public fun nearestStops(numberOfStops: Int = 2): List<Stop> {
-        if (currentLocation == null) {
-            return listOf()
-        }
-        val stops = App.stops.sortedWith(object : Comparator<Stop> {
-            override fun compare(p1: Stop, p2: Stop): Int = when {
-                ((currentLocation!!.latitude - p1.latitude).pow(2) + (currentLocation!!.longitude - p1.longitude).pow(2)) > ((currentLocation!!.latitude - p2.latitude).pow(
-                    2
-                ) + (currentLocation!!.longitude - p2.longitude).pow(2)) -> 1
-                ((currentLocation!!.latitude - p1.latitude).pow(2) + (currentLocation!!.longitude - p1.longitude).pow(2)) == ((currentLocation!!.latitude - p2.latitude).pow(
-                    2
-                ) + (currentLocation!!.longitude - p2.longitude).pow(2)) -> 0
-                else -> -1
-            }
-        })
-        return stops.take(numberOfStops)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Mapbox.getInstance(
@@ -68,19 +30,18 @@ class MainActivity : AppCompatActivity() {
         );
         setContentView(R.layout.activity_main)
         mapView.onCreate(savedInstanceState)
+        //mapView.setStyleUrl(getString(R.string.mapbox_light_theme))
+        //mapView.getMapAsync {}
 
         NavigationUI.setupActionBarWithNavController(this, NavHostFragment.findNavController(nav_host_fragment))
-
-        locationMananger = getSystemService(LOCATION_SERVICE) as LocationManager?
-        try {
-            locationMananger?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, this.locationListener)
-        } catch (e: SecurityException) {
-            Timber.tag("Location").w("Can't get location")
-        }
     }
 
     public override fun onStart() {
         super.onStart()
+        mapView.onStart()
+
+        AppLocalisationManager.shared.localisationMananger = getSystemService(LOCATION_SERVICE) as LocationManager
+
         var jsonString = application.assets.open("stops.json").bufferedReader().use {
             it.readText()
         }
@@ -99,20 +60,62 @@ class MainActivity : AppCompatActivity() {
             .add(KotlinJsonAdapterFactory())
             .build()
 
-        var linesColorsMoshiAdapter = moshi.adapter<Array<LineColor>>(Array<LineColor>::class.java)
+        val linesColorsMoshiAdapter = moshi.adapter<Array<LineColor>>(Array<LineColor>::class.java)
         App.linesColors = ArrayList(linesColorsMoshiAdapter.fromJson(jsonString)!!.toList().sortedBy { it.line })
 
-        mapView.onStart()
+        val sharedPref = this.getSharedPreferences(getString(R.string.shared_preferences), Context.MODE_PRIVATE) ?: return
 
-        mapView.getMapAsync { mapboxMap ->
-            mapboxMap.setStyle(Style.Builder().fromUrl("mapbox://styles/remydcf/cjkl5fqlw616i2rmwvlv75j98")) { style ->
-                symbolManager = SymbolManager(mapView, mapboxMap, style)
-                symbolManager!!.iconAllowOverlap = true
-                symbolManager!!.textAllowOverlap = true
-
-                lineManager = LineManager(mapView, mapboxMap, style)
+        /*doAsync {
+            val days = listOf("Monday", "Friday", "Saturday", "Sunday")
+            for (day in days) {
+                Fuel.get("https://raw.githubusercontent.com/tpgoffline/tpgoffline-data/master/$day.timetables.md5")
+                    .responseString { _, _, result ->
+                        result.fold({ responseStringMD5 ->
+                            if (responseStringMD5 != sharedPref.getString(
+                                    getString(R.string.offline_departures_md5) + "_$day",
+                                    ""
+                                )
+                            ) {
+                                Fuel.get("https://raw.githubusercontent.com/tpgoffline/tpgoffline-data/master/$day.timetables")
+                                    .responseString { _, _, result ->
+                                        result.fold({ responseString ->
+                                            val departures = responseString.split("\n")
+                                            for (departure in departures) {
+                                                val departureComponent = departure.split(" ")
+                                                applicationContext.database.use {
+                                                    insert(
+                                                        "OfflineDepartures",
+                                                        "departure_stop" to departureComponent[0],
+                                                        "arrival_stop" to departureComponent[1],
+                                                        "departure_time" to departureComponent[2],
+                                                        "arrival_time" to departureComponent[3],
+                                                        "line" to departureComponent[4],
+                                                        "trip_id" to departureComponent[6],
+                                                        "destination_stop" to departureComponent[5],
+                                                        "day" to App.dayStringToId(day)
+                                                    )
+                                                }
+                                            }
+                                            with(sharedPref.edit()) {
+                                                putString(
+                                                    getString(R.string.offline_departures_md5) + "_$day",
+                                                    responseStringMD5
+                                                )
+                                                apply()
+                                            }
+                                        }, {
+                                            Timber.tag("Offline departures").w("Can't load ${day} offline departures")
+                                        })
+                                    }
+                            } else {
+                                Timber.tag("Offline departures").i("${day} offline departures are up to date")
+                            }
+                        }, {
+                            Timber.tag("Offline departures").w("Can't load ${day} offline departures")
+                        })
+                    }
             }
-        }
+        }*/
     }
 
     public override fun onResume() {
@@ -150,24 +153,24 @@ class MainActivity : AppCompatActivity() {
     fun drawLineOnMap(points: List<Marker>, line: String) {
         val lineColor = "#" + (App.linesColors.firstOrNull { it.line == line }?.background ?: "")
 
-        for (point in points) {
-            val icon = if (point.busIcon) {
-                "bus-15"
-            } else {
-                "marker-15"
-            }
-            val options = SymbolOptions()
-                .withLatLng(point.location)
-                .withIconImage(icon)
-                .withIconColor(lineColor)
-            symbolManager!!.create(options)
-        }
+        mapView.getMapAsync {
+            it.clear()
 
-        val lineOptions = LineOptions()
-            .withLineWidth(2F)
-            .withLatLngs(points.map { it.location })
-            .withLineColor(lineColor)
-        lineManager!!.create(lineOptions)
+            for (point in points) {
+                it.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(point.location))
+                        .title(point.title)
+                )
+            }
+
+            it.addPolyline(
+                PolylineOptions()
+                    .addAll(points.map { it.location })
+                    .color(Color.parseColor(lineColor))
+                    .width(2F)
+            )
+        }
     }
 
     val favoritesStops: MutableList<Int>
